@@ -21,14 +21,10 @@ namespace AutoStore.WebApi.Controllers
             this.customerService = customerService;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<ListAllCustomersDTO>> Get()
-        {
-            var allProducts = customerService
-                .GetAll()
-                .ToList();
-            return allProducts;
+        public ActionResult<IEnumerable<ListAllCustomersDTO>> Get() => customerService
+            .GetAll()
+            .ToList();
 
-        }
         [HttpGet("{id}")]
         public ActionResult<GetCustomerByIdDTO> Get(int id)
         {

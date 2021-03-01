@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutoStore.Common\AutoStore.Common.csproj" />
+    <ProjectReference Include="..\AutoStore.Data\AutoStore.Data.csproj" />
+  </ItemGroup>
+
+</Project>

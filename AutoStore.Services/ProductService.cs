@@ -72,6 +72,27 @@ namespace AutoStore.Services
 
             return product;
         }
+        public ICollection<ListAllProductsByCarTypeDTO> ListAllByProductType(string type)
+        {
+            CarType carType;
+            bool hasParsed = Enum.TryParse<CarType>(type, true, out carType);
+
+            if (!hasParsed)
+            {
+                throw new ArgumentException(ExceptionMessages.InvalidCarType);
+            }
+            var cars = this.dbContext
+                 .Cars
+                 .Where(c => c.CarType == carType)
+                 .Select(x => new ListAllProductsByCarTypeDTO
+                 {
+                     Name = x.ModelName,
+                     Price = x.Price
+
+                 })
+                 .ToList();
+            return cars;
+        }
         public async Task EditProduct(int id, EditProductDTO editProductDTO)
         {
             var dbProduct = dbContext.Products

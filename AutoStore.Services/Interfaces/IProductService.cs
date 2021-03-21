@@ -13,7 +13,7 @@ namespace AutoStore.Services.Interfaces
         Task InsertProduct(AddProductDTO productDTO);
         GetProductByIdDTO GetById(int id);
 
-        ICollection<ListAllProductsByCarTypeDTO> ListAllByProductType(string type);
+        ICollection<ListAllProductsByProductTypeDTO> ListAllByProductType(string type);
         ICollection<ListAllProductsDTO> GetAll();
         Task EditProduct(int id, EditProductDTO editProductDTO);
         Task<Product> Delete(int id);

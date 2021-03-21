@@ -39,11 +39,12 @@ namespace AutoStore.WebApi.Controllers
             }
             return productById;
         }
-        [HttpGet("{type}")]
-        public ActionResult<IEnumerable<ListAllProductsByCarTypeDTO>> GetAllProductsByCarType(string type)
+        [HttpGet]
+        [Route("productsByProductType/{type}")]
+        public ActionResult<IEnumerable<ListAllProductsByProductTypeDTO>> GetAllProductsByProductType(string type)
         {
-            var productsByCarType = service.ListAllByProductType(type).ToList();
-            return productsByCarType;
+            var productsByProductType = service.ListAllByProductType(type).ToList();
+            return productsByProductType;
         }
         [HttpPost]
         public async Task<ActionResult<AddProductDTO>> Post(AddProductDTO productDTO)

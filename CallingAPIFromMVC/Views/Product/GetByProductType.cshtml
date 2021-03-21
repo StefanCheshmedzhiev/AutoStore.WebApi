@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<CallingAPIFromMVC.Models.ProductData>
 
 @{
-    ViewData["Title"] = "GetByCarType";
+    ViewData["Title"] = "GetByProductType";
 }
 
-<h1>GetByCarType</h1>
+<h1>GetByProductType</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -43,8 +43,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id}) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.Id})
             </td>
         </tr>

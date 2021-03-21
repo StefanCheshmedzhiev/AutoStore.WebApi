@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutoStore.Common.DTOs.Products.OutputModels
 {
-    public class ListAllProductsByCarTypeDTO
+    public class ListAllProductsByProductTypeDTO
     {
         public string Name { get; set; }
 

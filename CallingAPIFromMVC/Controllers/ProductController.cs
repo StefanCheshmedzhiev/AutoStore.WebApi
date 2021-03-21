@@ -34,15 +34,15 @@ namespace CallingAPIFromMVC.Controllers
             }
             return View(products);
         }
-        public async Task<IActionResult> GetByCarType(string type)
+        public async Task<IActionResult> GetByProductType(string type)
         {
-            var product = new ProductData();
+            var product = new List<ProductData>();
             HttpClient client = _api.Initial();
             HttpResponseMessage res = await client.GetAsync($"products/{type}");
             if (res.IsSuccessStatusCode)
             {
                 var results = res.Content.ReadAsStringAsync().Result;
-                product = JsonConvert.DeserializeObject<ProductData>(results);
+                product = JsonConvert.DeserializeObject<List<ProductData>>(results);
             }
             return View(product);
         }

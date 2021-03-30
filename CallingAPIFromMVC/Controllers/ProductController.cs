@@ -34,12 +34,14 @@ namespace CallingAPIFromMVC.Controllers
             }
             return View(products);
         }
-        public async Task<IActionResult> GetByProductType(string type)
+
+        [HttpGet("Product/GetByProductType/{productType}")]
+        public async Task<IActionResult> GetByProductType(string productType)
         {
             
             var product = new List<ProductData>();
             HttpClient client = _api.Initial();
-            HttpResponseMessage res = await client.GetAsync($"products/GetByProductType/{type}");
+            HttpResponseMessage res = await client.GetAsync($"products/ProductType/{productType}");
             if (res.IsSuccessStatusCode)
             {
                 var results = res.Content.ReadAsStringAsync().Result;

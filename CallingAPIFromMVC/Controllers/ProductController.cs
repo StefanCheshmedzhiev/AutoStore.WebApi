@@ -50,5 +50,41 @@ namespace CallingAPIFromMVC.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> Details(int Id)
+        {
+            var product = new ProductData();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.GetAsync($"products/{Id}");
+            if (res.IsSuccessStatusCode)
+            {
+                var results = res.Content.ReadAsStringAsync().Result;
+                product = JsonConvert.DeserializeObject<ProductData>(results);
+            }
+            return View(product);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(ProductData product)
+        {
+            HttpClient client = _api.Initial();
+
+            //HTTP POST
+
+            var postTask = client.PostAsJsonAsync<ProductData>("products", product);
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
     }
 }

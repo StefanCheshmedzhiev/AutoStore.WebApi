@@ -63,12 +63,12 @@ namespace CallingAPIFromMVC.Controllers
             return View(product);
         }
 
-        public ActionResult Create()
+        public ActionResult create()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ProductData product)
+        public IActionResult create(ProductData product)
         {
             HttpClient client = _api.Initial();
 
@@ -85,6 +85,44 @@ namespace CallingAPIFromMVC.Controllers
 
             return View();
         }
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var product = new ProductData();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.GetAsync($"products/{Id}");
+            if (res.IsSuccessStatusCode)
+            {
+                var results = res.Content.ReadAsStringAsync().Result;
+                product = JsonConvert.DeserializeObject<ProductData>(results);
+            }
+            return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductData product)
+        {
+            HttpClient client = _api.Initial();
 
+            HttpResponseMessage response = await client.PutAsJsonAsync(
+                $"products/{product.Id}", product);
+            response.EnsureSuccessStatusCode();
+
+            product = await response.Content.ReadAsAsync<ProductData>();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+
+            var customer = new ProductData();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.DeleteAsync($"products/{Id}");
+
+            if (res.IsSuccessStatusCode)
+            {
+                var results = res.Content.ReadAsStringAsync().Result;
+                customer = JsonConvert.DeserializeObject<ProductData>(results);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

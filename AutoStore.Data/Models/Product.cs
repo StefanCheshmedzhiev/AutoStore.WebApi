@@ -3,6 +3,7 @@ using AutoStore.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace AutoStore.Data.Models
@@ -19,6 +20,7 @@ namespace AutoStore.Data.Models
         public ProductType ProductType { get; set; }
 
         [Range(GlobalConstants.SellableMinPrice, Double.MaxValue)]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
     }
 }

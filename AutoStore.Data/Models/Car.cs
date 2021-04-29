@@ -25,6 +25,8 @@ namespace AutoStore.Data.Models
         public bool IsSold { get; set; }
 
         [Range(GlobalConstants.SellableMinPrice, Double.MaxValue)]
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         [Required]
